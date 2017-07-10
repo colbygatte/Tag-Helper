@@ -1,0 +1,26 @@
+{
+    "name": "colbygatte/html-tag-helper",
+    "type": "library",
+    "require-dev": {
+        "symfony/var-dumper": "@stable",
+        "phpunit/phpunit": "^6.2"
+    },
+    "authors": [
+        {
+            "name": "colbygatte",
+            "email": "colbygatte@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "ColbyGatte\\": "src/"
+        },
+        "files": ["utilities/helpers.php"]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "ColbyGatte\\Tests\\": "tests/"
+        }
+    },
+    "require": {}
+}
