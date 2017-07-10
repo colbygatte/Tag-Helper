@@ -25,6 +25,11 @@ class TagHelper
     protected $content;
     
     /**
+     * @var callable[]
+     */
+    protected $filters = [];
+    
+    /**
      * @var array
      */
     protected $formattedArguments = [];
@@ -48,6 +53,24 @@ class TagHelper
     public static function getInstance()
     {
         return static::$instance ?: static::$instance = new static;
+    }
+    
+    public function addFilter($callable)
+    {
+        $this->filters[] = $callable;
+    }
+    
+    /**
+     * @param       $text
+     * @param array ...$arguments
+     */
+    public function puts($text = null, ...$arguments)
+    {
+        if (is_null($text)) {
+            echo $this->str();
+        }
+        
+        echo $this->get($text, ...$arguments);
     }
     
     /**
@@ -111,20 +134,16 @@ class TagHelper
      */
     public function get($text, ...$arguments)
     {
-        return sprintf($text, ...$arguments);
+        return sprintf($this->applyFilters($text), ...$arguments);
     }
     
-    /**
-     * @param       $text
-     * @param array ...$arguments
-     */
-    public function print($text = null, ...$arguments)
+    public function applyFilters($text)
     {
-        if (is_null($text)) {
-            echo $this;
+        foreach ($this->filters as $filter) {
+            $text = $filter($text);
         }
         
-        echo $this->get($text, ...$arguments);
+        return $text;
     }
     
     /**

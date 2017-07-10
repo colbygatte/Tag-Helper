@@ -2,7 +2,6 @@
 
 use ColbyGatte\Html\TagHelper;
 
-
 if (! function_exists('tag')) {
     /**
      * If a callback is given in place of $content, output buffering is used to capture the content.
@@ -11,7 +10,7 @@ if (! function_exists('tag')) {
      * @param $content
      * @param array $arguments
      *
-     * @return \ColbyGatte\WpTheme\Translator
+     * @return TagHelper
      */
     function tag($tag, $content = '', $arguments = [])
     {
@@ -46,5 +45,22 @@ if (! function_exists('tag_str')) {
     function tag_str($tag, $content = '', $arguments = [])
     {
         return tag($tag, $content, $arguments)->str();
+    }
+}
+
+if (! function_exists('snake_case')) {
+    /**
+     * @param $string
+     * @param string $separator
+     *
+     * @return string
+     */
+    function snake_case($string, $separator = '_')
+    {
+        static $cache = [];
+        
+        return isset($cache[$separator.$string])
+            ? $cache[$separator.$string]
+            : ($cache[$separator.$string] = ltrim(strtolower(preg_replace('/[A-Z]([A-Z](?![a-z]))*/', $separator.'$0', $string)), $separator));
     }
 }
