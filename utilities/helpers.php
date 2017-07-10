@@ -30,7 +30,7 @@ if (! function_exists('tag_echo')) {
      */
     function tag_echo($tag, $content = '', $arguments = [])
     {
-        tag($tag, $content, $arguments)->print();
+        tag($tag, $content, $arguments)->puts();
     }
 }
 
