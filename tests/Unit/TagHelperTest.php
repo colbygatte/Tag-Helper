@@ -2,7 +2,6 @@
 
 namespace ColbyGatte\Tests\Unit;
 
-use ColbyGatte\Html\TagHelper;
 use ColbyGatte\Tests\TestCase;
 
 class TagHelperTest extends TestCase
@@ -19,10 +18,10 @@ class TagHelperTest extends TestCase
     /** @test */
     public function can_add_filter()
     {
-        TagHelper::getInstance()->addFilter(function ($text) {
+        tag_main_instance()->addFilter(function ($text) {
             return "__$text";
         });
         
-        $this->assertEquals('<p>__Colby</p>', tag_str('p', 'Colby'));
+        $this->assertEquals('__Colby', tag_main_instance()->get('Colby'));
     }
 }
