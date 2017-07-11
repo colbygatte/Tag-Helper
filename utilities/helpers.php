@@ -19,3 +19,20 @@ if (! function_exists('tag')) {
         return (new TagHelper)->tag($tag, $content, $arguments);
     }
 }
+
+if (! function_exists('red_snake_case')) {
+    /**
+     * @param $string
+     * @param string $separator
+     *
+     * @return string
+     */
+    function red_snake_case($string, $separator = '_')
+    {
+        static $cache = [];
+        
+        return isset($cache[$separator.$string])
+            ? $cache[$separator.$string]
+            : ($cache[$separator.$string] = ltrim(strtolower(preg_replace('/[A-Z]([A-Z](?![a-z]))*/', $separator.'$0', $string)), $separator));
+    }
+}
