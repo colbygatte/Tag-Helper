@@ -20,14 +20,14 @@ if (! function_exists('tag')) {
     }
 }
 
-if (! function_exists('red_snake_case')) {
+if (! function_exists('tag_helper_snake_case')) {
     /**
      * @param $string
      * @param string $separator
      *
      * @return string
      */
-    function red_snake_case($string, $separator = '_')
+    function tag_helper_snake_case($string, $separator = '_')
     {
         static $cache = [];
         
